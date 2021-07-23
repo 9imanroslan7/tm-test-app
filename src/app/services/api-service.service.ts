@@ -11,7 +11,7 @@ export class ApiServiceService {
   headers
   constructor(
     private http:HttpClient
-  ) { this.headers=new HttpHeaders({ 'Content-Type': 'application/json; charset=UTF-8' })}
+  ) { this.headers=new HttpHeaders({ 'Accept': 'application/json' })} //,'Content-Type': 'application/json; charset=UTF-8'
 
   fetchAllData(){
     return this.http.get(`${AppConfig.api}fetchAllData.php`,this.headers)
@@ -32,7 +32,11 @@ export class ApiServiceService {
   }
 
   fetchDataByDate(body){
-    return this.http.post(`${AppConfig.api}fetchDataByDate.php`,body,this.headers)
+    const httpOptions = {
+      headers: this.headers,
+      params: body
+    };
+    return this.http.post(`${AppConfig.api}fetchDataByDate.php`,null,httpOptions)
     .pipe(
       map((data) => {
         return data
