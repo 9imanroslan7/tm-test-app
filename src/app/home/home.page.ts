@@ -3,6 +3,7 @@ import { ApiServiceService } from '../services/api-service.service';
 import { ArcElement, BarController, BarElement, BubbleController, CategoryScale, Chart, Decimation, DoughnutController, Filler, Legend, 
   LinearScale, LineController, LineElement, LogarithmicScale, PieController, PointElement, PolarAreaController, RadarController, 
   RadialLinearScale, ScatterController, TimeScale, TimeSeriesScale, Title, Tooltip } from 'chart.js';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -114,8 +115,9 @@ export class HomePage implements AfterViewInit {
   }
 
   fetchDataByDate(selected_date){
-    const body={dates:selected_date}
-    this.api.fetchDataByDate(body).subscribe(
+    // const body={dates:selected_date}
+    const params = new HttpParams().set("dates", selected_date)
+    this.api.fetchDataByDate(params).subscribe(
       data=>{
         console.log('data by date',data);
         this.dataByDate=data['val']
