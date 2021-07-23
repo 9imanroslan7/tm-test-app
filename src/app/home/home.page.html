@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+  <!-- <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Blank</ion-title>
     </ion-toolbar>
@@ -16,5 +16,35 @@
   <div id="container">
     <strong>Ready to create an app?</strong>
     <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  </div> -->
+
+  <ion-list>
+    <ion-item>
+      <ion-label>Pick Date</ion-label>
+      <ion-select (ionChange)="pickDate($event)">
+        <ion-select-option *ngFor="let date of dates" value="{{date.Date}}">{{date.Date}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+
+    <ion-card>
+      <ion-card-header>
+        Bar Chart
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #barCanvas style="position: relative; height:20vh; width:40vw"></canvas>
+      </ion-card-content>
+    </ion-card>
+
+    <div>
+      <ion-list>
+        <ion-item *ngFor="let data of dataByDate">
+          <ion-label>{{data.State}}</ion-label>
+          <ion-text slot="end">{{data.NoOfCases}}</ion-text>
+        </ion-item>
+      </ion-list>
+    </div>
+
+
 </ion-content>
