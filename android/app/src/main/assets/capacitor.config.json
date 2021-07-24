@@ -1,0 +1,6 @@
+{
+	"appId": "tm.test.app",
+	"appName": "test-app",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
