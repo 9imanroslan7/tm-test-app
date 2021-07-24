@@ -111,8 +111,13 @@ export class HomePage implements AfterViewInit {
           }]
       },
       options: {
-        //events:[''],
+        events:['click'],
           scales: {
+            x:{
+              ticks:{
+                autoSkip:false
+              }
+            },
               y: {
                   beginAtZero: true,
                   min:0,
