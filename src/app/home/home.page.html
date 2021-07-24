@@ -10,15 +10,16 @@
   <ion-list>
     <ion-item>
       <ion-label>Pick Date</ion-label>
-      <ion-select (ionChange)="pickDate($event)">
+      <ion-select (ionChange)="pickDate($event)" interface="action-sheet">
         <ion-select-option *ngFor="let date of dates" value="{{date.Date}}">{{date.Date}}</ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-item lines="none">
-      <ion-label><b>Total Case</b></ion-label>
-      <ion-text slot="end">{{totalCase}}</ion-text>
-    </ion-item>
   </ion-list>
+
+  <div *ngIf="showData" class="total-div">
+    <ion-label><b>Total Case</b></ion-label>
+    <ion-text style="float: right;" slot="end">{{totalCase}}</ion-text>
+  </div>
   
   <!-- Chart Canvas -->
   <canvas #barCanvas style="position: relative; height:20vh; width:40vw"></canvas>
@@ -31,6 +32,24 @@
         <ion-text slot="end"><b>Cases</b></ion-text>
       </ion-item>
       <ion-item *ngFor="let data of dataByDate">
+        <ion-avatar slot="start">
+          <img *ngIf="data.State == 'Selangor' " src="../../assets/flags/sgr.svg">
+          <img *ngIf="data.State == 'Kuala Lumpur' " src="../../assets/flags/kul.svg">
+          <img *ngIf="data.State == 'Sabah' " src="../../assets/flags/sbh.svg">
+          <img *ngIf="data.State == 'Johor' " src="../../assets/flags/jhr.svg">
+          <img *ngIf="data.State == 'N. Sembilan' " src="../../assets/flags/nsn.svg">
+          <img *ngIf="data.State == 'P. Pinang' " src="../../assets/flags/png.svg">
+          <img *ngIf="data.State == 'Melaka' " src="../../assets/flags/mlk.svg">
+          <img *ngIf="data.State == 'Sarawak' " src="../../assets/flags/swk.svg">
+          <img *ngIf="data.State == 'Kedah' " src="../../assets/flags/kdh.svg">
+          <img *ngIf="data.State == 'Kelantan' " src="../../assets/flags/ktn.svg">
+          <img *ngIf="data.State == 'Labuan' " src="../../assets/flags/lbn.svg">
+          <img *ngIf="data.State == 'Pahang' " src="../../assets/flags/phg.svg">
+          <img *ngIf="data.State == 'Perak' " src="../../assets/flags/prk.svg">
+          <img *ngIf="data.State == 'Perlis' " src="../../assets/flags/pls.svg">
+          <img *ngIf="data.State == 'Putrajaya' " src="../../assets/flags/pjy.svg">
+          <img *ngIf="data.State == 'Terengganu' " src="../../assets/flags/trg.svg">
+        </ion-avatar>
         <ion-label>{{data.State}}</ion-label>
         <ion-text slot="end">{{data.NoOfCases}}</ion-text>
       </ion-item>
