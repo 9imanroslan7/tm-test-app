@@ -4,6 +4,7 @@ import { ArcElement, BarController, BarElement, BubbleController, CategoryScale,
   LinearScale, LineController, LineElement, LogarithmicScale, PieController, PointElement, PolarAreaController, RadarController, 
   RadialLinearScale, ScatterController, TimeScale, TimeSeriesScale, Title, Tooltip } from 'chart.js';
 import { HttpParams } from '@angular/common/http';
+import { LoadingService } from '../services/loading.service';
 
 @Component({
   selector: 'app-home',
@@ -14,12 +15,19 @@ export class HomePage implements AfterViewInit {
   @ViewChild("barCanvas") private barCanvas: ElementRef;
 
   dates:any
+  canvasUsed=false
+  showData=false
   selected_date:any
-  barChart: any;
+  barChart: Chart
   dataByDate:any
+  totalCase:any
+  totalState:any
+  caseArray=[]
+
   
   constructor(
     private api:ApiServiceService,
+    private loading:LoadingService
   ) {
     Chart.register(
       ArcElement,
@@ -52,45 +60,63 @@ export class HomePage implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.barChartMethod()
+    //this.barChartMethod()
   }
 
-  barChartMethod() {
+  barChartMethod(state,caseArray) {
     this.barChart = new Chart(this.barCanvas.nativeElement, {
-      type: 'line',
+      type: 'bar',
       data: {
-          labels: ['Pahang', 'Selangor', 'P.Pinang', 'Kedah', 'Kelantan', 'Johor'],
+          labels:state,
           datasets: [{
-            label: 'Covid-19 New Cases',
-            data: [65, 59, 80, 81, 56, 55, 40],
-            fill: false,
-            borderColor: 'rgb(75, 192, 192)',
-            tension: 0.1
-              // label: 'No of New Cases',
-              // data: [12, 19, 3, 5, 2, 3],
-              // backgroundColor: [
-              //     'black',
-              //     'rgba(54, 162, 235, 0.2)',
-              //     'rgba(255, 206, 86, 0.2)',
-              //     'rgba(75, 192, 192, 0.2)',
-              //     'rgba(153, 102, 255, 0.2)',
-              //     'rgba(255, 159, 64, 0.2)'
-              // ],
-              // borderColor: [
-              //     'rgba(255, 99, 132, 1)',
-              //     'rgba(54, 162, 235, 1)',
-              //     'rgba(255, 206, 86, 1)',
-              //     'rgba(75, 192, 192, 1)',
-              //     'rgba(153, 102, 255, 1)',
-              //     'rgba(255, 159, 64, 1)'
-              // ],
-              // borderWidth: 1
+              label: 'No of Cases',
+              data: caseArray,
+              backgroundColor: [
+                "rgba(255, 99, 132, 0.2)",
+                "rgba(54, 162, 235, 0.2)",
+                "rgba(255, 206, 86, 0.2)",
+                "rgba(75, 192, 192, 0.2)",
+                "rgba(153, 102, 255, 0.2)",
+                "rgba(255, 159, 64, 0.2)",
+                "rgba(255, 99, 132, 0.2)",
+                "rgba(54, 162, 235, 0.2)",
+                "rgba(255, 206, 86, 0.2)",
+                "rgba(75, 192, 192, 0.2)",
+                "rgba(153, 102, 255, 0.2)",
+                "rgba(255, 159, 64, 0.2)",
+                "rgba(255, 99, 132, 0.2)",
+                "rgba(54, 162, 235, 0.2)",
+                "rgba(255, 206, 86, 0.2)",
+                "rgba(75, 192, 192, 0.2)"
+              ],
+              borderColor: [
+                "rgba(255,99,132,1)",
+                "rgba(54, 162, 235, 1)",
+                "rgba(255, 206, 86, 1)",
+                "rgba(75, 192, 192, 1)",
+                "rgba(153, 102, 255, 1)",
+                "rgba(255, 159, 64, 1)",
+                "rgba(255,99,132,1)",
+                "rgba(54, 162, 235, 1)",
+                "rgba(255, 206, 86, 1)",
+                "rgba(75, 192, 192, 1)",
+                "rgba(153, 102, 255, 1)",
+                "rgba(255, 159, 64, 1)",
+                "rgba(255,99,132,1)",
+                "rgba(54, 162, 235, 1)",
+                "rgba(255, 206, 86, 1)",
+                "rgba(75, 192, 192, 1)",
+              ],
+              borderWidth: 1
           }]
       },
       options: {
+        //events:[''],
           scales: {
               y: {
-                  beginAtZero: true
+                  beginAtZero: true,
+                  min:0,
+                  max:250
               }
           }
       }
@@ -114,21 +140,34 @@ export class HomePage implements AfterViewInit {
     )
   }
 
-  fetchDataByDate(selected_date){
-    // const body={dates:selected_date}
-    const params = new HttpParams().set("dates", selected_date)
-    this.api.fetchDataByDate(params).subscribe(
-      data=>{
-        console.log('data by date',data);
-        this.dataByDate=data['val']
-      }
-    )
-  }
-
   pickDate(event){
     console.log('selected date',event['detail'].value);
     this.selected_date=event['detail'].value
     this.fetchDataByDate(this.selected_date)
   }
+
+  fetchDataByDate(selected_date){
+    const params = new HttpParams().set("dates", selected_date)
+    this.api.fetchDataByDate(params).subscribe(
+      data=>{
+        console.log('data by date',data);
+        this.showData=true
+        this.dataByDate=data['val']
+        this.totalCase=data['total']
+        this.totalState=data['state']
+        this.caseArray=data['caseArray']
+        if(this.canvasUsed==true){
+          this.barChart.data.labels=this.totalState
+          this.barChart.data.datasets[0].data=this.caseArray
+          this.barChart.update()
+        }else{
+          this.canvasUsed=true
+          this.barChartMethod(this.totalState,this.caseArray)
+        }
+      }
+    )
+  }
+
+
 
 }
