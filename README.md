@@ -1,3 +1,4 @@
+
 # Technologies used:
 -Ionic Angular Framework
 -nodeJS
@@ -20,5 +21,8 @@
 
 # APK File
 https://drive.google.com/file/d/1I0tLWtL-uSEAr7d_p0AxSAWj8R9EmLyX/view?usp=sharing
+
+# Preview
+https://user-images.githubusercontent.com/70473293/126860390-ab097a1c-2256-4916-afef-d7ab04f5eefa.mp4
 
 
