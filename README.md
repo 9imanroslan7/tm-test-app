@@ -11,8 +11,8 @@
 * change the selected date and the report will be updated 
 * Data should be retrieved from database 
 
-# Bonus point:
-* use chart/graph to visualize the data
+# Extra:
+* Chart.js library for data visualization (chart/graph)
 
 # APK File
 v1.0.3 - Click link and install apps for testing
