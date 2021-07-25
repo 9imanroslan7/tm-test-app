@@ -11,8 +11,9 @@
 * change the selected date and the report will be updated 
 * Data should be retrieved from database 
 
-# Extra:
+# Note:
 * Chart.js library for data visualization (chart/graph)
+* Php File Folder contain all php file for this mobile application and it is for evaluation purpose
 
 # APK File
 v1.0.3 - Click link and install apps for testing
