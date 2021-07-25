@@ -13,7 +13,7 @@
 
 # Note:
 * Chart.js library for data visualization (chart/graph)
-* Php File Folder contain all php file for this mobile application and it is for evaluation purpose
+* src/php file contain all php file for this mobile application and it is for evaluation purpose
 
 # APK File
 v1.0.3 - Click link and install apps for testing
