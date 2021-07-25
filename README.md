@@ -18,8 +18,3 @@
 # APK File
 v1.0.3 - Click link and install apps for testing
 https://drive.google.com/file/d/1Gv0ilyfDQscSsQSXP-wtOEvnCqBvKWiW/view?usp=sharing
-
-# Preview
-
-
-
