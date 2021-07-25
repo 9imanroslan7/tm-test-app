@@ -2,7 +2,7 @@
 # Technologies used:
 * Ionic 5 Angular Framework
 * nodeJS
-* 000Webhost for database server
+* 000Webhost as database server
 
 # Requirement:
 * show no of cases by state based on the selected date
