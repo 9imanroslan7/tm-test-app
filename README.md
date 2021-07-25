@@ -4,12 +4,12 @@
 * nodeJS
 * 000Webhost as database server
 
-# Requirement:
-* show no of cases by state based on the selected date
-* sorted by in descending order by no of cases
-* show the total no of cases in Malaysia on the selected date
-* change the selected date and the report will be updated 
-* Data should be retrieved from database 
+# Features:
+* can show no of cases by state based on the selected date
+* data is sorted by in descending order by no of cases
+* can show the total no of cases in Malaysia on the selected date
+* can change the selected date and the report will be updated 
+* Data is retrieved from database (000Webhost database server)
 
 # Note:
 * Chart.js library for data visualization (chart/graph)
